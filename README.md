@@ -15,28 +15,37 @@ For this project, you will work with the [Tennis](https://github.com/Unity-Techn
 
 In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.
 
-The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
+The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
 
-The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
+- After each episode, we add up the rewards that each agent received, to get a final score for each agent. We then take the maximum of these 2 scores, which is considered the episode's score.
 
-- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
-- This yields a single **score** for each episode.
-
-The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
+The environment is considered solved, once the average of those **scores** is at least +0.5 for more than 100 episodes.
 
 ### Getting Started
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
-    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
-    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
-    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
-    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
+    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)
+    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
+    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
+
+
+Depending on the operating system, the path in line 8 of both the ====
+    Mac: "path/to/Tennis.app"
+    Windows (x86): "path/to/Tennis_Windows_x86/Tennis.exe"
+    Windows (x86_64): "path/to/Tennis_Windows_x86_64/Tennis.exe"
+    Linux (x86): "path/to/Tennis_Linux/Tennis.x86"
+    Linux (x86_64): "path/to/Tennis_Linux/Tennis.x86_64"
+    Linux (x86, headless): "path/to/Tennis_Linux_NoVis/Tennis.x86"
+    Linux (x86_64, headless): "path/to/Tennis_Linux_NoVis/Tennis.x86_64"
+
+For instance, if you are using a Mac, then you downloaded Tennis.app. If this file is in the same folder as the notebook, then the line below should appear as follows:
     
     (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
-    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
+    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the environment.
 
-2. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
+2. Place the file in this folder, and unzip (or decompress) the file. 
 
 ### Dependencies
 
@@ -71,8 +80,8 @@ pip install .
 python -m ipykernel install --user --name drlnd --display-name "drlnd"
 ```
 
-5. Before running code in a notebook, change the kernel to match the `drlnd` environment by using the drop-down `Kernel` menu. 
-![dlrnd kernel][image2]
+
+
 
 
 
