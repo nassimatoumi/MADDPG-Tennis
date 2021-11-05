@@ -73,12 +73,12 @@ python -m ipykernel install --user --name drlnd --display-name "drlnd"
 ## Instructions
 - To train the agent from scratch, run the following command, while specifying in the file the path of the newly created models of the actor and critic lines 61 and 62 respectively if needed:
 
-    **python3 train_model.py**
+    **python3 train_agent.py**
 
 Note that the hyperparameter values can be tuned in the ddpg_agent file, and the Deep Neural Network architecture can be changed in the file model.py 
 
 - To use the trained model, run the following command:
 
-    **python3 use_model.py**
+    **python3 use_agent.py**
     
 The path of the model file of the actor and critic can be specified in lines 38 and 39 respectively. 
