@@ -5,11 +5,10 @@ from ddpg_agent import Agent
 import matplotlib.pyplot as plt
 import torch
 
-# select this option to load version 2 of the environment
-env = UnityEnvironment(file_name='/data/Reacher_Linux_NoVis/Reacher.x86_64')
+env = UnityEnvironment(file_name="/data/Tennis_Linux_NoVis/Tennis")
 
 
-def ddpg(reward_objective=30, max_t=1000):
+def ddpg(reward_objective=0.5):
     """DDPG.
 
     Params
@@ -21,6 +20,7 @@ def ddpg(reward_objective=30, max_t=1000):
     """
     episodes_over_objective = 0
     i_episode = 0
+    t=0
     scores = []
     scores_window = deque(maxlen=100)  # A queue to keep only the last 100 episodes' scores
 
@@ -28,26 +28,29 @@ def ddpg(reward_objective=30, max_t=1000):
         env_info = env.reset(train_mode=True)[brain_name]
         states = env_info.vector_observations
         score = np.zeros(num_agents)  # initialize the score (for each agent)
-        agent.reset()
 
-        for t in range(max_t):  # A loop for the iterations
+        # agent.reset()
+
+        while True:  # A loop for the iterations
             actions = agent.act(states)  # select an action (for each agent)
             actions = np.clip(actions, -1, 1)  # all actions between -1 and 1
-            env_info = env.step(actions)[brain_name]  # send all actions to tne environment
+            #print("actions")
+            #print(actions)
+            env_info = env.step(actions)[brain_name]  # send all actions to the environment
             next_states = env_info.vector_observations  # get next state (for each agent)
             rewards = env_info.rewards  # get reward (for each agent)
             dones = env_info.local_done  # see if episode finished
             for i in range(num_agents):
                 agent.step(states[i], actions[i], rewards[i] * 0.1, next_states[i], dones[i], t)
-            score += env_info.rewards  # update the score (for each agent)
+            score += rewards  # update the score (for each agent)
             states = next_states  # roll over states to next time step
+            t+=1
             if np.any(dones):  # exit loop if episode finished
                 break
-        print('Total score (averaged over agents) this episode: {}'.format(np.mean(score)))
 
-        scores_window.append(np.mean(score))  # save most recent score
-        scores.append(np.mean(score))  # save most recent score
-        print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)), end="")
+        scores_window.append(np.max(score))  # save most recent score
+        scores.append(np.max(score))  # save most recent score
+        print('\rEpisode {}\tMaximum Score: {:.2f}'.format(i_episode, np.max(score)), end="")
         if i_episode % 100 == 0:
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
         if np.mean(scores_window) >= reward_objective:
@@ -94,7 +97,7 @@ scores = ddpg()
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.plot(np.arange(len(scores)), scores)
-plt.ylabel('Score')
+plt.ylabel('Maximum Score')
 plt.xlabel('Episode #')
 plt.savefig("Scores.png")
 
