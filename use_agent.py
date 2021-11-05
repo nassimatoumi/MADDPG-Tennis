@@ -34,6 +34,7 @@ if torch.cuda.is_available():
 else:
     map_location='cpu'
 
+    
 agent.actor_local.load_state_dict(torch.load('actor_checkpoint.pth',map_location=map_location))
 agent.critic_local.load_state_dict(torch.load('critic_checkpoint.pth',map_location=map_location))
 
