@@ -29,23 +29,13 @@ The environment is considered solved, once the average of those **scores** is at
     - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
 
-
-Depending on the operating system, the path in line 8 of both the ====
-    Mac: "path/to/Tennis.app"
-    Windows (x86): "path/to/Tennis_Windows_x86/Tennis.exe"
-    Windows (x86_64): "path/to/Tennis_Windows_x86_64/Tennis.exe"
-    Linux (x86): "path/to/Tennis_Linux/Tennis.x86"
-    Linux (x86_64): "path/to/Tennis_Linux/Tennis.x86_64"
-    Linux (x86, headless): "path/to/Tennis_Linux_NoVis/Tennis.x86"
-    Linux (x86_64, headless): "path/to/Tennis_Linux_NoVis/Tennis.x86_64"
-
-For instance, if you are using a Mac, then you downloaded Tennis.app. If this file is in the same folder as the notebook, then the line below should appear as follows:
-    
-    (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
-
-    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the environment.
-
 2. Place the file in this folder, and unzip (or decompress) the file. 
+3. Depending on the operating system, the path in line 8 of both the **train_agent** and **use_agent** files should be set as follows:
+    - Mac: "Tennis.app"
+    - Windows (x86): "Tennis_Windows_x86/Tennis.exe"
+    - Windows (x86_64): "Tennis_Windows_x86_64/Tennis.exe"
+    - Linux (x86): "Tennis_Linux/Tennis.x86"
+    - Linux (x86_64): "Tennis_Linux/Tennis.x86_64"
 
 ### Dependencies
 
@@ -80,9 +70,15 @@ pip install .
 python -m ipykernel install --user --name drlnd --display-name "drlnd"
 ```
 
-
-
-
-
-
 ## Instructions
+- To train the agent from scratch, run the following command, while specifying in the file the path of the newly created models of the actor and critic lines 61 and 62 respectively if needed:
+
+    **python3 train_model.py**
+
+Note that the hyperparameter values can be tuned in the ddpg_agent file, and the Deep Neural Network architecture can be changed in the file model.py 
+
+- To use the trained model, run the following command:
+
+    **python3 use_model.py**
+    
+The path of the model file of the actor and critic can be specified in lines 38 and 39 respectively. 
