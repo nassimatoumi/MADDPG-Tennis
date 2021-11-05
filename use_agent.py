@@ -5,7 +5,6 @@ from dqn_agent import Agent
 import matplotlib.pyplot as plt
 import torch
 
-
 env = UnityEnvironment(file_name='/data/Reacher_Linux_NoVis/Reacher.x86_64')
 num_episodes = 10
 
